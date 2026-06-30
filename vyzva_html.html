@@ -5,246 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rodinná výzva</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#15140F;
-    --surface:#1F1D17;
-    --surface-2:#262318;
-    --line:rgba(242,237,228,0.10);
-    --line-strong:rgba(242,237,228,0.18);
-    --ink:#F2EDE4;
-    --ink-dim:#9C968A;
-    --ink-faint:#6F6A60;
-    --push:#FF5A33;
-    --push-dim:#3A1F14;
-    --squat:#2FBF9E;
-    --squat-dim:#10302A;
-    --gold:#E8B23D;
+    --bg:#15140F;--surface:#1F1D17;--surface-2:#262318;
+    --line:rgba(242,237,228,0.10);--line-strong:rgba(242,237,228,0.18);
+    --ink:#F2EDE4;--ink-dim:#9C968A;--ink-faint:#6F6A60;
+    --push:#FF5A33;--push-dim:#3A1F14;--squat:#2FBF9E;--gold:#E8B23D;
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px;}
-
-  /* ---- HERO ---- */
-  .hero{
-    border-bottom:1px solid var(--line);
-    padding-bottom:22px;
-    margin-bottom:28px;
-    position:relative;
-  }
-  .eyebrow{
-    font-size:11px;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:var(--ink-faint);
-    margin:0 0 6px;
-  }
-  .h1{
-    font-family:'Oswald',sans-serif;
-    font-weight:700;
-    font-size:40px;
-    letter-spacing:0.01em;
-    text-transform:uppercase;
-    margin:0 0 14px;
-    line-height:1.02;
-  }
+  .hero{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:28px;}
+  .eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 6px;}
+  .h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:40px;letter-spacing:0.01em;text-transform:uppercase;margin:0 0 14px;line-height:1.02;}
   .h1 span{color:var(--push);}
-  .hero-meta{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-end;}
-  .countdown-num{
-    font-family:'Oswald',sans-serif;
-    font-weight:700;
-    font-size:34px;
-    line-height:1;
-  }
+  .track-progress{height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;margin-bottom:16px;}
+  .track-progress-fill{height:100%;background:linear-gradient(90deg,var(--push),var(--squat));border-radius:3px;transition:width .4s ease;}
+  .hero-meta{display:flex;gap:28px;flex-wrap:wrap;}
+  .countdown-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:34px;line-height:1;}
   .countdown-label{font-size:12px;color:var(--ink-dim);margin-top:4px;}
-  .track-progress{
-    flex:1;
-    min-width:160px;
-    height:6px;
-    background:var(--surface-2);
-    border-radius:3px;
-    overflow:hidden;
-    margin-bottom:8px;
-  }
-  .track-progress-fill{
-    height:100%;
-    background:linear-gradient(90deg,var(--push),var(--squat));
-    border-radius:3px;
-    transition:width .4s ease;
-  }
-
-  /* ---- SECTION LABELS ---- */
-  .sec-label{
-    font-family:'Oswald',sans-serif;
-    font-size:13px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--ink-dim);
-    margin:0 0 14px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
+  .sec-label{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-dim);margin:0 0 14px;display:flex;align-items:center;gap:10px;}
   .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
-
-  /* ---- LEADERBOARD (lanes) ---- */
   .board{margin-bottom:36px;}
-  .lane-row{
-    display:grid;
-    grid-template-columns:26px 100px 1fr 70px;
-    align-items:center;
-    gap:12px;
-    padding:10px 0;
-    border-bottom:1px solid var(--line);
-  }
+  .lane-row{display:grid;grid-template-columns:26px 100px 1fr 70px;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);}
   .lane-row:last-child{border-bottom:none;}
-  .lane-rank{
-    font-family:'Oswald',sans-serif;
-    font-size:15px;
-    color:var(--ink-faint);
-  }
+  .lane-rank{font-family:'Oswald',sans-serif;font-size:15px;color:var(--ink-faint);}
   .lane-rank.rank-1{color:var(--gold);}
-  .lane-name{
-    font-weight:600;
-    font-size:14px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .lane-track{
-    position:relative;
-    height:20px;
-    background:var(--surface);
-    border-radius:4px;
-    overflow:hidden;
-  }
-  .lane-fill{
-    position:absolute;left:0;top:0;height:100%;
-    display:flex;
-  }
+  .lane-name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .lane-track{position:relative;height:20px;background:var(--surface);border-radius:4px;overflow:hidden;}
+  .lane-fill{position:absolute;left:0;top:0;height:100%;display:flex;}
   .lane-fill .seg-push{background:var(--push);height:100%;}
   .lane-fill .seg-squat{background:var(--squat);height:100%;}
-  .lane-total{
-    font-family:'Oswald',sans-serif;
-    font-size:17px;
-    text-align:right;
-  }
-  .legend{display:flex;gap:18px;margin-top:14px;font-size:12px;color:var(--ink-dim);}
-  .legend-dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:1px;}
-
-  /* ---- METRIC CARDS ---- */
+  .lane-total{font-family:'Oswald',sans-serif;font-size:17px;text-align:right;}
   .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:36px;}
   .metric{background:var(--surface);border-radius:10px;padding:14px 16px;}
   .metric-label{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-faint);margin:0 0 6px;}
   .metric-val{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;}
-
-  /* ---- FORM ---- */
-  .logform{
-    background:var(--surface);
-    border-radius:12px;
-    padding:18px;
-    margin-bottom:36px;
-  }
+  .logform{background:var(--surface);border-radius:12px;padding:18px;margin-bottom:36px;}
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
   .field{display:flex;flex-direction:column;gap:5px;}
   .field label{font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:0.05em;}
-  .field input, .field select{
-    background:var(--surface-2);
-    border:1px solid var(--line-strong);
-    border-radius:7px;
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    font-size:15px;
-    padding:9px 10px;
-    width:100%;
-  }
-  .field input:focus, .field select:focus{outline:none;border-color:var(--push);}
+  .field input,.field select{background:var(--surface-2);border:1px solid var(--line-strong);border-radius:7px;color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;padding:9px 10px;width:100%;}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--push);}
   .field input::placeholder{color:var(--ink-faint);}
-  .full{grid-column:1/-1;}
-  .submit-btn{
-    width:100%;
-    background:var(--push);
-    color:#1A0C06;
-    border:none;
-    border-radius:7px;
-    font-family:'Oswald',sans-serif;
-    font-weight:600;
-    font-size:14px;
-    letter-spacing:0.04em;
-    text-transform:uppercase;
-    padding:12px;
-    cursor:pointer;
-  }
+  .submit-btn{width:100%;background:var(--push);color:#1A0C06;border:none;border-radius:7px;font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;padding:12px;cursor:pointer;}
   .submit-btn:active{transform:scale(0.99);}
   .submit-btn:disabled{opacity:0.5;cursor:default;}
   .form-msg{font-size:12px;color:var(--squat);margin-top:8px;min-height:14px;}
-
-  /* ---- HISTORY ---- */
-  .history-controls{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
-  .chip{
-    background:var(--surface);
-    border:1px solid var(--line-strong);
-    color:var(--ink-dim);
-    border-radius:20px;
-    padding:6px 14px;
-    font-size:12px;
-    cursor:pointer;
-    font-family:'Inter',sans-serif;
-  }
-  .chip.active{background:var(--ink);color:var(--bg);border-color:var(--ink);}
   .bars{display:flex;align-items:flex-end;gap:3px;height:140px;margin-bottom:8px;padding:0 2px;}
-  .bar-col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative;}
+  .bar-col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;}
   .bar-stack{width:100%;max-width:18px;display:flex;flex-direction:column-reverse;border-radius:2px 2px 0 0;overflow:hidden;}
   .bar-squat{background:var(--squat);width:100%;}
   .bar-push{background:var(--push);width:100%;}
-  .bar-empty{width:100%;max-width:18px;height:2px;background:var(--line);}
-  .bar-day-label{font-size:9px;color:var(--ink-faint);margin-top:6px;writing-mode:vertical-rl;text-orientation:mixed;}
-  .empty-state{
-    text-align:center;
-    padding:40px 20px;
-    color:var(--ink-dim);
-    font-size:14px;
-  }
-
-  /* ---- LOG TABLE ---- */
+  .legend{display:flex;gap:18px;margin-top:14px;font-size:12px;color:var(--ink-dim);}
+  .legend-dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:1px;}
   .log-table{width:100%;border-collapse:collapse;font-size:13px;}
-  .log-table th{
-    text-align:left;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-    color:var(--ink-faint);
-    font-weight:500;
-    padding:0 8px 8px;
-  }
+  .log-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-faint);font-weight:500;padding:0 8px 8px;}
   .log-table td{padding:9px 8px;border-top:1px solid var(--line);}
-  .log-table tr:hover td{background:rgba(242,237,228,0.02);}
-  .del-btn{
-    background:none;border:none;color:var(--ink-faint);
-    cursor:pointer;font-size:16px;line-height:1;padding:2px 6px;
-    border-radius:5px;
-  }
+  .del-btn{background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:16px;line-height:1;padding:2px 6px;border-radius:5px;}
   .del-btn:hover{color:var(--push);background:var(--push-dim);}
   .tcell-push{color:var(--push);}
   .tcell-squat{color:var(--squat);}
-
-  .sync-note{
-    font-size:11px;
-    color:var(--ink-faint);
-    text-align:center;
-    margin-top:30px;
-    line-height:1.6;
-  }
-
-  @media (max-width:480px){
+  .empty-state{text-align:center;padding:40px 20px;color:var(--ink-dim);font-size:14px;}
+  .sync-note{font-size:11px;color:var(--ink-faint);text-align:center;margin-top:30px;line-height:1.6;}
+  .loading-overlay{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:20px;color:var(--ink-dim);z-index:999;letter-spacing:0.05em;}
+  @media(max-width:480px){
     .h1{font-size:30px;}
     .form-grid{grid-template-columns:1fr;}
     .metrics{grid-template-columns:1fr 1fr;}
@@ -254,56 +80,35 @@
 </style>
 </head>
 <body>
+<div class="loading-overlay" id="loading">Načítám data…</div>
 <div class="wrap">
-
   <div class="hero">
     <p class="eyebrow">Rodinná výzva · 1.7. – 30.8.</p>
     <h1 class="h1">Kliky <span>a</span> dřepy</h1>
     <div class="track-progress"><div class="track-progress-fill" id="progress-fill" style="width:0%"></div></div>
     <div class="hero-meta">
-      <div>
-        <div class="countdown-num" id="days-left">–</div>
-        <div class="countdown-label" id="days-left-label">dní zbývá</div>
-      </div>
-      <div>
-        <div class="countdown-num" id="days-done">–</div>
-        <div class="countdown-label">dní za sebou</div>
-      </div>
+      <div><div class="countdown-num" id="days-left">–</div><div class="countdown-label">dní zbývá</div></div>
+      <div><div class="countdown-num" id="days-done">–</div><div class="countdown-label">dní za sebou</div></div>
     </div>
   </div>
 
   <p class="sec-label">Žebříček</p>
   <div class="board" id="board"></div>
-
   <div class="metrics" id="metrics"></div>
 
   <p class="sec-label">Zapsat dnešní dávku</p>
   <div class="logform">
     <div class="form-grid">
-      <div class="field">
-        <label for="f-name">Jméno</label>
-        <input id="f-name" list="name-list" placeholder="Napiš jméno" autocomplete="off">
-        <datalist id="name-list"></datalist>
-      </div>
-      <div class="field">
-        <label for="f-date">Datum</label>
-        <input id="f-date" type="date">
-      </div>
-      <div class="field">
-        <label for="f-push">Kliky</label>
-        <input id="f-push" type="number" min="0" inputmode="numeric" placeholder="0">
-      </div>
-      <div class="field">
-        <label for="f-squat">Dřepy</label>
-        <input id="f-squat" type="number" min="0" inputmode="numeric" placeholder="0">
-      </div>
+      <div class="field"><label for="f-name">Jméno</label><input id="f-name" list="name-list" placeholder="Napiš jméno" autocomplete="off"><datalist id="name-list"></datalist></div>
+      <div class="field"><label for="f-date">Datum</label><input id="f-date" type="date" min="2026-07-01" max="2026-08-30"></div>
+      <div class="field"><label for="f-push">Kliky</label><input id="f-push" type="number" min="0" inputmode="numeric" placeholder="0"></div>
+      <div class="field"><label for="f-squat">Dřepy</label><input id="f-squat" type="number" min="0" inputmode="numeric" placeholder="0"></div>
     </div>
     <button class="submit-btn" id="submit-btn">Přidat záznam</button>
     <div class="form-msg" id="form-msg"></div>
   </div>
 
-  <p class="sec-label">Historie</p>
-  <div class="history-controls" id="history-controls"></div>
+  <p class="sec-label">Historie (posledních 30 dní)</p>
   <div class="bars" id="bars"></div>
   <div class="legend">
     <span><span class="legend-dot" style="background:var(--push)"></span>kliky</span>
@@ -316,230 +121,176 @@
     <tbody id="log-tbody"></tbody>
   </table>
   <div id="empty-state" class="empty-state" style="display:none;">Zatím žádné záznamy. Přidej první dávku výše.</div>
-
-  <p class="sync-note">Data se ukládají sdíleně — uvidí je každý, kdo appku otevře.</p>
+  <p class="sync-note">Data se sdílí v reálném čase přes Firebase – uvidí je každý člen rodiny.</p>
 </div>
 
-<script>
-const START = new Date('2026-07-01T00:00:00');
-const END = new Date('2026-08-30T23:59:59');
-const STORAGE_KEY = 'family-challenge-entries';
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAM0po8qDHqlQf5uq2oFYGNeqo6LMiBrjE",
+  authDomain: "rodinnavyzvakliky.firebaseapp.com",
+  projectId: "rodinnavyzvakliky",
+  storageBucket: "rodinnavyzvakliky.firebasestorage.app",
+  messagingSenderId: "469990502180",
+  appId: "1:469990502180:web:3d4dc07ab1e0b69dbc0db1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const colRef = collection(db, "entries");
+
 let entries = [];
-let historyFilter = 'all';
 
-function todayStr(){
-  const d = new Date();
-  return d.toISOString().slice(0,10);
-}
-document.getElementById('f-date').value = todayStr();
-document.getElementById('f-date').min = '2026-07-01';
-document.getElementById('f-date').max = '2026-08-30';
-
+// Countdown
+const START = new Date('2026-07-01T00:00:00');
+const END   = new Date('2026-08-30T23:59:59');
 function setCountdown(){
   const now = new Date();
   const totalDays = Math.round((END-START)/86400000)+1;
-  let dayIndex = Math.floor((now-START)/86400000)+1;
-  let daysDone = Math.min(Math.max(dayIndex,0), totalDays);
-  let daysLeft = Math.max(totalDays - daysDone, 0);
-  if(now < START){ daysDone = 0; daysLeft = totalDays; }
-  if(now > END){ daysDone = totalDays; daysLeft = 0; }
+  let daysDone = Math.min(Math.max(Math.floor((now-START)/86400000)+1,0),totalDays);
+  let daysLeft = Math.max(totalDays-daysDone,0);
+  if(now<START){daysDone=0;daysLeft=totalDays;}
+  if(now>END){daysDone=totalDays;daysLeft=0;}
   document.getElementById('days-left').textContent = daysLeft;
   document.getElementById('days-done').textContent = daysDone;
   document.getElementById('progress-fill').style.width = Math.round((daysDone/totalDays)*100)+'%';
 }
 setCountdown();
 
-async function loadEntries(){
-  try{
-    const res = await window.storage.get(STORAGE_KEY, true);
-    entries = res ? JSON.parse(res.value) : [];
-  }catch(e){
-    entries = [];
-  }
-  render();
-}
+// Default date
+document.getElementById('f-date').value = new Date().toISOString().slice(0,10);
 
-async function saveEntries(){
-  try{
-    await window.storage.set(STORAGE_KEY, JSON.stringify(entries), true);
-  }catch(e){
-    document.getElementById('form-msg').textContent = 'Ukládání selhalo, zkus to znovu.';
-  }
-}
-
-function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
-
-function fmtDate(iso){
-  const [y,m,d] = iso.split('-');
-  return d+'.'+m+'.';
-}
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function fmtDate(iso){const[,m,d]=iso.split('-');return d+'.'+m+'.';}
 
 function aggregateByPerson(){
-  const map = {};
+  const map={};
   entries.forEach(e=>{
-    if(!map[e.name]) map[e.name] = {name:e.name, push:0, squat:0};
-    map[e.name].push += e.pushups;
-    map[e.name].squat += e.squats;
+    if(!map[e.name]) map[e.name]={name:e.name,push:0,squat:0};
+    map[e.name].push+=e.pushups;
+    map[e.name].squat+=e.squats;
   });
   return Object.values(map).sort((a,b)=>(b.push+b.squat)-(a.push+a.squat));
 }
 
 function renderBoard(){
-  const people = aggregateByPerson();
-  const board = document.getElementById('board');
-  if(people.length===0){
-    board.innerHTML = '<div class="empty-state">Žebříček se objeví po prvním zápisu.</div>';
-    return;
-  }
-  const maxTotal = Math.max(...people.map(p=>p.push+p.squat), 1);
-  board.innerHTML = people.map((p,i)=>{
-    const total = p.push+p.squat;
-    const widthPct = Math.max((total/maxTotal)*100, 4);
-    const pushPct = total>0 ? (p.push/total)*100 : 0;
-    const squatPct = total>0 ? (p.squat/total)*100 : 0;
-    return `<div class="lane-row">
+  const people=aggregateByPerson();
+  const board=document.getElementById('board');
+  if(!people.length){board.innerHTML='<div class="empty-state">Žebříček se objeví po prvním zápisu.</div>';return;}
+  const maxT=Math.max(...people.map(p=>p.push+p.squat),1);
+  board.innerHTML=people.map((p,i)=>{
+    const t=p.push+p.squat;
+    const w=Math.max((t/maxT)*100,4);
+    const pp=t>0?(p.push/t)*100:0;
+    const sp=t>0?(p.squat/t)*100:0;
+    return`<div class="lane-row">
       <div class="lane-rank ${i===0?'rank-1':''}">${i+1}</div>
-      <div class="lane-name">${escapeHtml(p.name)}</div>
-      <div class="lane-track">
-        <div class="lane-fill" style="width:${widthPct}%">
-          <div class="seg-push" style="width:${pushPct}%"></div>
-          <div class="seg-squat" style="width:${squatPct}%"></div>
-        </div>
-      </div>
-      <div class="lane-total">${total.toLocaleString('cs-CZ')}</div>
+      <div class="lane-name">${esc(p.name)}</div>
+      <div class="lane-track"><div class="lane-fill" style="width:${w}%"><div class="seg-push" style="width:${pp}%"></div><div class="seg-squat" style="width:${sp}%"></div></div></div>
+      <div class="lane-total">${t.toLocaleString('cs-CZ')}</div>
     </div>`;
   }).join('');
 }
 
 function renderMetrics(){
-  const totalPush = entries.reduce((s,e)=>s+e.pushups,0);
-  const totalSquat = entries.reduce((s,e)=>s+e.squats,0);
-  const people = aggregateByPerson();
-  const metrics = document.getElementById('metrics');
-  metrics.innerHTML = `
+  const totalPush=entries.reduce((s,e)=>s+e.pushups,0);
+  const totalSquat=entries.reduce((s,e)=>s+e.squats,0);
+  const people=aggregateByPerson();
+  document.getElementById('metrics').innerHTML=`
     <div class="metric"><p class="metric-label">Kliky celkem</p><p class="metric-val" style="color:var(--push)">${totalPush.toLocaleString('cs-CZ')}</p></div>
     <div class="metric"><p class="metric-label">Dřepy celkem</p><p class="metric-val" style="color:var(--squat)">${totalSquat.toLocaleString('cs-CZ')}</p></div>
-    <div class="metric"><p class="metric-label">Soutěžících</p><p class="metric-val">${people.length}</p></div>
-  `;
-}
-
-function renderHistoryControls(){
-  const people = aggregateByPerson();
-  const wrap = document.getElementById('history-controls');
-  const names = ['all', ...people.map(p=>p.name)];
-  wrap.innerHTML = names.map(n=>{
-    const label = n==='all' ? 'Všichni' : n;
-    return `<button class="chip ${historyFilter===n?'active':''}" data-name="${escapeHtml(n)}">${escapeHtml(label)}</button>`;
-  }).join('');
-  wrap.querySelectorAll('.chip').forEach(c=>{
-    c.addEventListener('click', ()=>{ historyFilter = c.dataset.name; renderHistoryControls(); renderBars(); });
-  });
+    <div class="metric"><p class="metric-label">Soutěžících</p><p class="metric-val">${people.length}</p></div>`;
 }
 
 function renderBars(){
-  const filtered = historyFilter==='all' ? entries : entries.filter(e=>e.name===historyFilter);
-  const byDate = {};
-  filtered.forEach(e=>{
-    if(!byDate[e.date]) byDate[e.date] = {push:0, squat:0};
-    byDate[e.date].push += e.pushups;
-    byDate[e.date].squat += e.squats;
+  const byDate={};
+  entries.forEach(e=>{
+    if(!byDate[e.date]) byDate[e.date]={push:0,squat:0};
+    byDate[e.date].push+=e.pushups;
+    byDate[e.date].squat+=e.squats;
   });
-  const dates = Object.keys(byDate).sort();
-  const bars = document.getElementById('bars');
-  if(dates.length===0){
-    bars.innerHTML = '<div class="empty-state" style="width:100%">Zatím žádná data k zobrazení.</div>';
-    return;
-  }
-  const maxVal = Math.max(...dates.map(d=>byDate[d].push+byDate[d].squat), 1);
-  bars.innerHTML = dates.map(d=>{
-    const v = byDate[d];
-    const total = v.push+v.squat;
-    const heightPct = Math.max((total/maxVal)*100, 2);
-    const pushPct = total>0 ? (v.push/total)*100 : 0;
-    const squatPct = total>0 ? (v.squat/total)*100 : 0;
-    return `<div class="bar-col" title="${fmtDate(d)}: ${total} celkem">
-      <div class="bar-stack" style="height:${heightPct}%">
-        <div class="bar-squat" style="height:${squatPct}%"></div>
-        <div class="bar-push" style="height:${pushPct}%"></div>
+  const dates=Object.keys(byDate).sort().slice(-30);
+  const bars=document.getElementById('bars');
+  if(!dates.length){bars.innerHTML='<div class="empty-state" style="width:100%">Zatím žádná data.</div>';return;}
+  const maxV=Math.max(...dates.map(d=>byDate[d].push+byDate[d].squat),1);
+  bars.innerHTML=dates.map(d=>{
+    const v=byDate[d];const t=v.push+v.squat;
+    const h=Math.max((t/maxV)*100,2);
+    const pp=t>0?(v.push/t)*100:0;
+    const sp=t>0?(v.squat/t)*100:0;
+    return`<div class="bar-col" title="${fmtDate(d)}: ${t}">
+      <div class="bar-stack" style="height:${h}%">
+        <div class="bar-squat" style="height:${sp}%"></div>
+        <div class="bar-push" style="height:${pp}%"></div>
       </div>
     </div>`;
   }).join('');
 }
 
 function renderLogTable(){
-  const tbody = document.getElementById('log-tbody');
-  const empty = document.getElementById('empty-state');
-  const sorted = [...entries].sort((a,b)=> b.date.localeCompare(a.date) || b.createdAt-a.createdAt).slice(0,30);
-  if(sorted.length===0){
-    document.getElementById('log-table').style.display='none';
-    empty.style.display='block';
-    return;
-  }
-  document.getElementById('log-table').style.display='table';
-  empty.style.display='none';
-  tbody.innerHTML = sorted.map(e=>`
+  const tbody=document.getElementById('log-tbody');
+  const empty=document.getElementById('empty-state');
+  const sorted=[...entries].sort((a,b)=>b.date.localeCompare(a.date)||(b.createdAt||0)-(a.createdAt||0)).slice(0,30);
+  if(!sorted.length){document.getElementById('log-table').style.display='none';empty.style.display='block';return;}
+  document.getElementById('log-table').style.display='table';empty.style.display='none';
+  tbody.innerHTML=sorted.map(e=>`
     <tr>
       <td>${fmtDate(e.date)}</td>
-      <td>${escapeHtml(e.name)}</td>
+      <td>${esc(e.name)}</td>
       <td class="tcell-push">${e.pushups}</td>
       <td class="tcell-squat">${e.squats}</td>
-      <td><button class="del-btn" data-id="${e.id}" aria-label="Smazat záznam">×</button></td>
-    </tr>
-  `).join('');
+      <td><button class="del-btn" data-id="${e.id}">×</button></td>
+    </tr>`).join('');
   tbody.querySelectorAll('.del-btn').forEach(btn=>{
-    btn.addEventListener('click', async ()=>{
-      entries = entries.filter(e=>e.id!==btn.dataset.id);
-      await saveEntries();
-      render();
+    btn.addEventListener('click',async()=>{
+      if(!confirm('Smazat záznam?')) return;
+      await deleteDoc(doc(db,'entries',btn.dataset.id));
     });
   });
 }
 
 function renderNameList(){
-  const people = aggregateByPerson();
-  document.getElementById('name-list').innerHTML = people.map(p=>`<option value="${escapeHtml(p.name)}">`).join('');
-}
-
-function escapeHtml(str){
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
+  const people=aggregateByPerson();
+  document.getElementById('name-list').innerHTML=people.map(p=>`<option value="${esc(p.name)}">`).join('');
 }
 
 function render(){
-  renderBoard();
-  renderMetrics();
-  renderHistoryControls();
-  renderBars();
-  renderLogTable();
-  renderNameList();
+  renderBoard();renderMetrics();renderBars();renderLogTable();renderNameList();
 }
 
-document.getElementById('submit-btn').addEventListener('click', async ()=>{
-  const name = document.getElementById('f-name').value.trim();
-  const date = document.getElementById('f-date').value;
-  const pushups = parseInt(document.getElementById('f-push').value || '0', 10);
-  const squats = parseInt(document.getElementById('f-squat').value || '0', 10);
-  const msg = document.getElementById('form-msg');
-
-  if(!name){ msg.style.color = 'var(--push)'; msg.textContent = 'Napiš jméno.'; return; }
-  if(!date){ msg.style.color = 'var(--push)'; msg.textContent = 'Vyber datum.'; return; }
-  if(pushups===0 && squats===0){ msg.style.color = 'var(--push)'; msg.textContent = 'Zadej aspoň jedno číslo.'; return; }
-
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  entries.push({id:uid(), name, date, pushups: Math.max(pushups,0), squats: Math.max(squats,0), createdAt: Date.now()});
-  await saveEntries();
-  document.getElementById('f-push').value='';
-  document.getElementById('f-squat').value='';
-  msg.style.color = 'var(--squat)';
-  msg.textContent = 'Přidáno.';
-  setTimeout(()=>{ msg.textContent=''; }, 2000);
-  btn.disabled = false;
+// Real-time listener
+const q=query(colRef,orderBy('createdAt','desc'));
+onSnapshot(q,snap=>{
+  entries=snap.docs.map(d=>({id:d.id,...d.data()}));
   render();
+  document.getElementById('loading').style.display='none';
 });
 
-loadEntries();
+// Submit
+document.getElementById('submit-btn').addEventListener('click',async()=>{
+  const name=document.getElementById('f-name').value.trim();
+  const date=document.getElementById('f-date').value;
+  const pushups=Math.max(parseInt(document.getElementById('f-push').value||'0',10),0);
+  const squats=Math.max(parseInt(document.getElementById('f-squat').value||'0',10),0);
+  const msg=document.getElementById('form-msg');
+  if(!name){msg.style.color='var(--push)';msg.textContent='Napiš jméno.';return;}
+  if(!date){msg.style.color='var(--push)';msg.textContent='Vyber datum.';return;}
+  if(!pushups&&!squats){msg.style.color='var(--push)';msg.textContent='Zadej aspoň jedno číslo.';return;}
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true;
+  try{
+    await addDoc(colRef,{name,date,pushups,squats,createdAt:Date.now()});
+    document.getElementById('f-push').value='';
+    document.getElementById('f-squat').value='';
+    msg.style.color='var(--squat)';msg.textContent='Přidáno! ✓';
+    setTimeout(()=>{msg.textContent='';},2000);
+  }catch(e){
+    msg.style.color='var(--push)';msg.textContent='Chyba při ukládání: '+e.message;
+  }
+  btn.disabled=false;
+});
 </script>
 </body>
 </html>
